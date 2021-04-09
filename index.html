@@ -19,7 +19,7 @@
       .wrapper {
         width: 340px;
         height: 340px;
-        background: url(./part2-bg.png) no-repeat;
+        background: url(./part-bg.png) no-repeat;
         margin: 0 auto;
         display: flex;
         align-self: center;
@@ -54,19 +54,32 @@
 
       #part {
         transition: transform 10.5s;
-        transition-timing-function: cubic-bezier(0.42, 0, 0, 0.99); /*调整旋转速度和起始速率*/
+        transition-timing-function: cubic-bezier(
+          0.42,
+          0,
+          0,
+          0.99
+        ); /*调整旋转速度和起始速率*/
+      }
+
+      .desc {
+          position: absolute;
+          bottom: -60px;
+          font-size: 20px;
       }
     </style>
   </head>
   <body>
     <div class="wrapper">
       <div id="pointer" class="rotate-pointer"></div>
+      <p class="desc">点击指针旋转</p>
     </div>
 
     <div class="wrapper">
-        <div id="part" class="rotate-part"></div>
-        <div id="pointer1" class="pointer"></div>
-      </div>
+      <div id="part" class="rotate-part"></div>
+      <div id="pointer1" class="pointer"></div>
+      <p class="desc">点击指针旋转转盘</p>
+    </div>
 
     <script>
       (function () {
@@ -101,14 +114,14 @@
 
           dom.addEventListener('transitionend', function () {
             for (var key in options.gifts) {
-                if (
-                  options.gifts[key].angleStart <= resultAngle &&
-                  resultAngle <= options.gifts[key].angleEnd
-                ) {
-                  confirm(options.gifts[key].tips);
-                  window.location.reload();
-                }
+              if (
+                options.gifts[key].angleStart <= resultAngle &&
+                resultAngle <= options.gifts[key].angleEnd
+              ) {
+                confirm(options.gifts[key].tips);
+                window.location.reload();
               }
+            }
           });
         }
 
@@ -159,15 +172,15 @@
         };
 
         function _pointerBegin() {
-            _begin(pointer)
+          _begin(pointer);
         }
 
         function _partBegin() {
-            _begin(part)
+          _begin(part);
         }
 
-        pointer.addEventListener('click', _pointerBegin)
-        pointer1.addEventListener('click', _partBegin)
+        pointer.addEventListener('click', _pointerBegin);
+        pointer1.addEventListener('click', _partBegin);
       })();
     </script>
   </body>
